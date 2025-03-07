@@ -29,9 +29,16 @@ import {
   faPaintBrush,
   faVideo,
   faThumbsUp,
-  faVolumeLow
+  faVolumeLow,
+  faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGithub,
+  faTwitter,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+
+import { faSquare } from "@fortawesome/free-regular-svg-icons";
 
 export default defineNuxtPlugin((nuxtApp) => {
   library.add(
@@ -65,7 +72,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     faVideo,
     faYoutube,
     faThumbsUp,
-    faVolumeLow
+    faVolumeLow,
+    faSquare,
+    faSquareCheck
   );
 
   nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon);

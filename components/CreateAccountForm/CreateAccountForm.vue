@@ -3,7 +3,7 @@
   <div class="flex flex-col justify-center h-full">
     <img class="h-10 mb-4" src="~/assets/imgs/undraw_tree.svg" alt="">
     <h3 class="text-2xl text-center">Bem-vindo ao <b class="bg-gradient-to-r from-green-300 to-green-400 text-transparent bg-clip-text">Saving Energy</b></h3>
-    <span class="text-center text-zinc-500">Preencha o formulário abaixo para acessar o sistema</span>
+    <span class="text-center text-zinc-500">Preencha o formulário abaixo para criar seu acesso</span>
 
     <form class="px-10 md:px-20">
       <label class="block text-gray-700 text-start mt-10"><b>E-mail</b></label>
@@ -24,14 +24,33 @@
         :class="{ 'border-red-500': errors.password }"
       />
       <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
-      <div class="flex w-full justify-end mt-2">
-        <span class="text-end text-zinc-600">Esqueceu a senha?</span>
+
+
+      <label class="block text-gray-700 mt-5"><b>Confirmar senha</b></label>
+      <input
+        v-model="confirmPass"
+        placeholder="******"
+        type="password"
+        class="w-full border p-2 rounded-lg"
+        :class="{ 'border-red-500': errors.confirmPass }"
+      />
+      <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.confirmPass }}</p>
+
+      <div class="flex mt-5 items-center justify-end">
+        <font-awesome-icon :icon="['fas', 'square-check']" class="text-green-300" />
+        <span class="mx-2">Pretendo usar em minha <b class="">Residência</b></span>
       </div>
 
-      <button class="py-3 px-5 from-zinc-700 to-zinc-900 rounded-lg text-white w-full hover:from-green-300 hover:to-green-500 bg-gradient-to-r mt-5"><b>ENTRAR</b></button>
+      <div class="flex mt-3 items-center justify-end">
+        <font-awesome-icon :icon="['far', 'square']" />
+        <span class="mx-2">Pretendo usar em minha <b class="">Empresa</b></span>
+      </div>
+      
+
+      <button class="py-3 px-5 from-zinc-700 to-zinc-900 rounded-lg text-white w-full hover:from-green-300 hover:to-green-500 bg-gradient-to-r mt-5"><b>CRIAR CONTA</b></button>
       <div class="flex justify-center mt-5">
-        <nuxt-link to="create-account">
-          <h3 class="hover:text-green-300 cursor-pointer">Criar nova conta</h3>
+        <nuxt-link to="login">
+          <h3 class="hover:text-green-300 cursor-pointer">Já sou registrado</h3>
         </nuxt-link>
       </div>
     </form>
@@ -52,6 +71,10 @@ const schema = yup.object({
     .string()
     .min(6, "A senha deve ter pelo menos 6 caracteres")
     .required("A senha é obrigatória"),
+  confirmPass: yup
+    .string()
+    .min(6, "A senha deve ter pelo menos 6 caracteres")
+    .required("A senha é obrigatória"),
 });
 
 const { defineField, handleSubmit, errors } = useForm({
@@ -60,10 +83,10 @@ const { defineField, handleSubmit, errors } = useForm({
 
 const [email] = defineField("email");
 const [password] = defineField("password");
+const [confirmPass] = defineField("confirmPass");
 
 const onSubmit = handleSubmit((values) => {
   console.log("Dados enviados:", values);
-  alert("Login realizado com sucesso!");
 });
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-3">
     <div class="col-span-1">
-      <CreateAccountForm />
+      <LoginForm />
     </div>
     <div class="col-span-2">
       <img class="min-h-screen object-cover w-full" src="~/assets/imgs/create-account.png" alt="">
