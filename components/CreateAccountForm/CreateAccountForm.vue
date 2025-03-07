@@ -36,7 +36,7 @@
       />
       <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.confirmPass }}</p>
 
-      <div class="flex mt-5 items-center justify-end">
+      <!-- <div class="flex mt-5 items-center justify-end">
         <font-awesome-icon :icon="['fas', 'square-check']" class="text-green-300" />
         <span class="mx-2">Pretendo usar em minha <b class="">Residência</b></span>
       </div>
@@ -44,10 +44,10 @@
       <div class="flex mt-3 items-center justify-end">
         <font-awesome-icon :icon="['far', 'square']" />
         <span class="mx-2">Pretendo usar em minha <b class="">Empresa</b></span>
-      </div>
+      </div> -->
       
 
-      <button class="py-3 px-5 from-zinc-700 to-zinc-900 rounded-lg text-white w-full hover:from-green-300 hover:to-green-500 bg-gradient-to-r mt-5"><b>CRIAR CONTA</b></button>
+      <button class="py-3 px-5 from-zinc-700 to-zinc-900 rounded-lg text-white w-full hover:from-green-300 hover:to-green-500 bg-gradient-to-r mt-8"><b>CRIAR CONTA</b></button>
       <div class="flex justify-center mt-5">
         <nuxt-link to="login">
           <h3 class="hover:text-green-300 cursor-pointer">Já sou registrado</h3>

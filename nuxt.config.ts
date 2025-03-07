@@ -10,4 +10,11 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  app: {
+    head: {
+      bodyAttrs: {
+        class: 'bg-zinc-100'
+      }
+    }
+  }
 })

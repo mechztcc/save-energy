@@ -31,6 +31,8 @@ import {
   faThumbsUp,
   faVolumeLow,
   faSquareCheck,
+  faLightbulb,
+  faGear
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGithub,
@@ -74,7 +76,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     faThumbsUp,
     faVolumeLow,
     faSquare,
-    faSquareCheck
+    faSquareCheck,
+    faLightbulb,
+    faGear
   );
 
   nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon);
