@@ -32,7 +32,11 @@ import {
   faVolumeLow,
   faSquareCheck,
   faLightbulb,
-  faGear
+  faGear,
+  faMagnifyingGlass,
+  faFilter,
+  faPen,
+  faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGithub,
@@ -78,7 +82,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     faSquare,
     faSquareCheck,
     faLightbulb,
-    faGear
+    faGear,
+    faMagnifyingGlass,
+    faFilter,
+    faPen,
+    faChevronLeft
   );
 
   nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon);

@@ -1,7 +1,7 @@
 <template>
   <div class="flex relative">
     <Sidebar />
-    <div class="mx-3">
+    <div class="px-5 w-full">
       <NuxtPage />
     </div>
   </div>
