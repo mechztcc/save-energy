@@ -14,8 +14,8 @@
       </nuxt-link>
     </div>
 
-    <nuxt-link to="login">
-      <span class="px-8 cursor-pointer py-3 mb-3">Sair</span>
+    <nuxt-link to="login" class="flex mb-5 w-full">
+      <span class="px-8 cursor-pointer border hover:border-zinc-400 border-transparent w-full rounded-lg py-3">Sair</span>
     </nuxt-link>
   </div>
 </template>
@@ -34,8 +34,8 @@ const items = reactive<
   {
     icon: ["fas", "lightbulb"],
     label: "Equipamentos",
-    url: "equipments-list",
-    active: () => route.fullPath === "/equipments-list",
+    url: "/equipments/list",
+    active: () => route.fullPath.includes('equipments'),
   },
   {
     icon: ["fas", "chart-simple"],

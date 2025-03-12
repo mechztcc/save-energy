@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full bg-zinc-50 rounded-lg px-10 py-10 mt-5">
     <div class="flex">
-      <h3 class="text-2xl"><b>Produtos</b></h3>
+      <h3 class="text-2xl"><b>Equipamentos</b></h3>
     </div>
     <div class="flex justify-end mb-5">
       <input
@@ -17,12 +17,14 @@
         Filtros
       </button>
 
-      <button
-        class="px-5 py-2 from-green-300 to-green-500 bg-gradient-to-r rounded-lg text-white"
-      >
-        <font-awesome-icon :icon="['fas', 'plus']" class="" />
-        Novo
-      </button>
+      <nuxt-link to="/equipments/create">
+        <button
+          class="px-5 py-2 from-green-300 to-green-500 bg-gradient-to-r rounded-lg text-white"
+        >
+          <font-awesome-icon :icon="['fas', 'plus']" class="" />
+          Novo
+        </button>
+      </nuxt-link>
     </div>
     <table class="w-full" border="1">
       <thead class="border-b border-zinc-300 bg-zinc-100">
@@ -72,9 +74,9 @@
         </button>
 
         <button
-          class="border border-zinc-300 px-3 py-2 rounded-lg mx-1"
+          class="border border-zinc-300 px-3 py-2 rounded-lg mx-1 hover:bg-green-400 hover:text-white hover:border-transparent"
           :class="{
-            'bg-green-400 text-white': item == 1,
+            'bg-green-400 text-white border-transparent': item == 1,
             ' text-zinc-600': item !== 1,
           }"
           v-for="(item, index) in 5"
@@ -93,10 +95,6 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-definePageMeta({
-  layout: "sidebar",
-});
-</script>
+<script setup lang="ts"></script>
 
-<style></style>
+<style scoped></style>
