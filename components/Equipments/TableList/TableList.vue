@@ -3,7 +3,7 @@
     <div class="flex">
       <h3 class="text-2xl"><b>Equipamentos</b></h3>
     </div>
-    <div class="flex justify-end mb-5">
+    <div class="flex justify-end mb-8">
       <input
         type="text"
         placeholder="Buscar"
