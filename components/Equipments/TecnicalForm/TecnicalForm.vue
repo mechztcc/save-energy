@@ -1,11 +1,11 @@
 
 <template>
   <div class="flex flex-col mt-20">
-    <div class="flex items-center justify-between cursor-pointer bg-green-300 px-2 rounded-lg" @click="onHandle">
-      <h3 class="text-lg text-zinc-50">Informações Técnicas</h3>
+    <div class="mb-5 flex items-center justify-between cursor-pointer from-green-300 to-green-500 bg-gradient-to-r px-2 rounded-lg" @click="onHandle">
+      <h3 class="text-xl text-zinc-50">Informações Técnicas</h3>
       <font-awesome-icon :icon="['fas', 'chevron-down']" class="mx-3 text-zinc-50"/>
     </div>
-    <form :hidden="isHidden" @change="onChange">
+    <form class="" :hidden="isHidden" @change="onChange">
       <div class="grid grid-cols-3 gap-5">
         <div class="col-span-1">
           <label class="block text-gray-700 mt-5"><b>Potência *</b></label>

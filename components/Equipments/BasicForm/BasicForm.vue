@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col mt-20">
     <div
-      class="flex items-center cursor-pointer justify-between bg-green-300 px-2 rounded-lg"
+      class="mb-5 flex items-center cursor-pointer justify-between from-green-300 to-green-500 bg-gradient-to-r px-2 rounded-lg"
       @click="onHandle"
     >
-      <h3 class="text-lg text-zinc-50">Informações Básicas</h3>
+      <h3 class="text-xl text-zinc-50">Informações Básicas</h3>
       <font-awesome-icon
         :icon="['fas', 'chevron-down']"
         class="mx-3 text-zinc-50"
