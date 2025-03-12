@@ -1,5 +1,8 @@
 <template>
   <div class="flex flex-col w-full bg-zinc-50 rounded-lg px-10 py-10 mt-5">
+    <div class="flex">
+      <h3 class="text-2xl"><b>Produtos</b></h3>
+    </div>
     <div class="flex justify-end mb-5">
       <input
         type="text"
@@ -22,9 +25,9 @@
       </button>
     </div>
     <table class="w-full" border="1">
-      <thead class="border-b border-zinc-300">
+      <thead class="border-b border-zinc-300 bg-zinc-100">
         <tr class="">
-          <th class="py-3 text-start">Nome</th>
+          <th class="py-3 px-2 text-start">Nome</th>
           <th class="text-start">Categoria</th>
           <th class="text-start">Potência</th>
           <th class="text-start">Ações</th>
@@ -36,7 +39,7 @@
           v-for="(item, index) in 5"
           :key="index"
         >
-          <td class="py-4">Produto 1</td>
+          <td class="py-4 px-2">Produto 1</td>
           <td>Eletrônico</td>
           <td>500W</td>
           <td class="">
