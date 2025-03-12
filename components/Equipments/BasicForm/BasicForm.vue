@@ -13,7 +13,7 @@
     <form :hidden="isHidden" @change="onChange">
       <div class="grid grid-cols-3 gap-5">
         <div class="col-span-1">
-          <label class="block text-gray-700 mt-5"><b>Nome </b></label>
+          <label class="block text-gray-700 mt-5"><b>Nome *</b></label>
           <input
             v-model="name"
             type="text"
@@ -88,7 +88,7 @@ const schema = yup.object({
   category: yup.string(),
 });
 
-const { defineField, handleSubmit, errors } = useForm({
+const { defineField, handleSubmit, errors, values, validate} = useForm({
   validationSchema: schema,
 });
 
@@ -102,7 +102,11 @@ function onHandle() {
   isHidden.value = !isHidden.value;
 }
 
-function onChange() {
+async function onChange() {
+  const { valid } = await validate()
+
+  store.basicValid = valid;
+  
   const payload = {
     name: name.value,
     model: model.value,
@@ -114,7 +118,6 @@ function onChange() {
     ...store.basicInformations,
     ...payload,
   };
-  console.log(store.basicInformations);
 }
 </script>
 

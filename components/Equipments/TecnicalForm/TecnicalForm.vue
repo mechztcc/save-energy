@@ -8,7 +8,7 @@
     <form :hidden="isHidden" @change="onChange">
       <div class="grid grid-cols-3 gap-5">
         <div class="col-span-1">
-          <label class="block text-gray-700 mt-5"><b>Potência </b></label>
+          <label class="block text-gray-700 mt-5"><b>Potência *</b></label>
           <input
             v-model="potency"
             type="text"
@@ -86,7 +86,7 @@ const schema = yup.object({
   description: yup.string(),
 });
 
-const { defineField, handleSubmit, errors } = useForm({
+const { defineField, handleSubmit, errors, validate } = useForm({
   validationSchema: schema,
 });
 
@@ -97,7 +97,11 @@ const [chain] = defineField("chain");
 const [potencyFact] = defineField("potencyFact");
 const [description] = defineField("description");
 
-function onChange() {
+async function onChange() {
+  const { valid} = await validate()
+
+  store.tecnicalValid = valid;
+  
   const payload = {
     potency: potency.value,
     tension: tension.value,

@@ -38,7 +38,8 @@ import {
   faPen,
   faChevronLeft,
   faPlug,
-  faChevronDown
+  faChevronDown,
+  faCircleNotch
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGithub,
@@ -90,7 +91,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     faPen,
     faChevronLeft,
     faPlug,
-    faChevronDown
+    faChevronDown,
+    faCircleNotch
   );
 
   nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon);

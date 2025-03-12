@@ -52,7 +52,7 @@
             </button>
 
             <button
-              class="mx-3 border border-zinc-300 px-3 py-2 text-zinc-600 rounded-lg hover:bg-yellow-400 hover:text-white hover:border-transparent"
+              class="mx-3 border border-zinc-300 px-3 py-2 text-zinc-600 rounded-lg hover:bg-green-400 hover:text-white hover:border-transparent"
             >
               <font-awesome-icon :icon="['fas', 'pen']" />
             </button>

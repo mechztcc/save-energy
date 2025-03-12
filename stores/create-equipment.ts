@@ -3,15 +3,10 @@ import { defineStore } from "pinia";
 export const useCreateEquipmentStore = defineStore("storeCreateEquipment", {
   state: () => ({
     stage: 1 as number,
-    basicInformations: {},
-    tecnicalnformations: {},
+    basicValid: false as boolean,
+    tecnicalValid: false as boolean,
+    basicInformations: {} as any,
+    tecnicalnformations: {} as any,
   }),
-  actions: {
-    onSubmit() {
-      const payload = {
-        basicInforations: this.basicInformations,
-        tecnicalinformations: this.tecnicalnformations,
-      };
-    },
-  },
+  actions: {},
 });
