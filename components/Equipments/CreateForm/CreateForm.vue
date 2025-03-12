@@ -39,11 +39,9 @@
 
     <EquipmentsBasicForm  />
     <EquipmentsTecnicalForm  />
-    <EquipmentsMonitoringForm v-if="store.stage == 3" />
-
 
     <div class="flex justify-end mt-5">
-      <button class="w-fit py-3 px-5 from-zinc-700 to-zinc-900 rounded-lg text-white  hover:from-green-300 hover:to-green-500 bg-gradient-to-r mt-5"><b>SALVAR</b></button>
+      <button class="w-fit py-3 px-5 from-zinc-700 to-zinc-900 rounded-lg text-white  hover:from-green-300 hover:to-green-500 bg-gradient-to-r mt-5" @click="store.onSubmit"><b>SALVAR</b></button>
     </div>
   </div>
 </template>

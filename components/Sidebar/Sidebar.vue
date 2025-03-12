@@ -1,6 +1,6 @@
 <template>
   <div
-    class="lef-0 top-0 h-screen bg-zinc-50 flex flex-col justify-between px-3 py-2 shadow"
+    class="lef-0 top-0 sticky h-screen bg-zinc-50 flex flex-col justify-between px-3 py-2 shadow"
   >
     <div class="flex flex-col">
       <nuxt-link :to="item.url" v-for="(item, index) in items" :key="index">

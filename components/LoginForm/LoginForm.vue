@@ -43,6 +43,7 @@
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 
+
 const schema = yup.object({
   email: yup
     .string()
@@ -61,10 +62,6 @@ const { defineField, handleSubmit, errors } = useForm({
 const [email] = defineField("email");
 const [password] = defineField("password");
 
-const onSubmit = handleSubmit((values) => {
-  console.log("Dados enviados:", values);
-  alert("Login realizado com sucesso!");
-});
 </script>
 
 <style scoped>
