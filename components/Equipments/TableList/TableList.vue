@@ -6,7 +6,7 @@
     <div class="flex" v-if="props.showTitle">
       <h3 class="text-2xl"><b>Equipamentos</b></h3>
     </div>
-    <div class="flex justify-end mb-8">
+    <div class="flex justify-end mb-5">
       <input
         type="text"
         placeholder="Buscar"
@@ -30,6 +30,12 @@
         </button>
       </nuxt-link>
     </div>
+    <div class="flex justify-end mb-3" v-if="selectable">
+      <span class="text-zinc-700">
+        Equipamentos selecionados <b>{{ selected.length }}</b>
+      </span>
+    </div>
+
     <table class="w-full" border="1">
       <thead class="border-b border-zinc-300 bg-zinc-100">
         <tr class="">
@@ -50,7 +56,7 @@
           v-for="(item, index) in paginatedEquipments"
           :key="index"
         >
-          <td class="py-4 px-2 text-sm text-zinc-700">
+          <td class="py-4 px-2 text-sm text-zinc-700" v-if="selectable">
             <input
               type="checkbox"
               :checked="selected.some((el) => el.id == item.id)"
@@ -158,9 +164,11 @@ function onHandleSelected(eqp: Equipment, event: any) {
 
   if (checked) {
     selected.value.push(eqp);
+    emits('selected', selected.value)
     return;
   } else {
     selected.value = selected.value.filter((el) => el.id != eqp.id);
+    emits('selected', selected.value)
     return;
   }
 }
