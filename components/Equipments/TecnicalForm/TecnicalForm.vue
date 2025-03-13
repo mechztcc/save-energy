@@ -62,7 +62,7 @@
 
         <div class="col-span-3">
           <label class="block text-gray-700 mt-5"><b>Descrição (opcional) </b></label>
-          <textarea rows="10" class="w-full border border-zinc-400 p-2 rounded-lg" v-model="description"></textarea>
+          <textarea rows="5" class="w-full border border-zinc-400 p-2 rounded-lg" v-model="description"></textarea>
           <p class="text-white text-center bg-red-300 rounded-lg px-2 text-sm mt-1">{{ errors.description }}</p>
           
         </div>

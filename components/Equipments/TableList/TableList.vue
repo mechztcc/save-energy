@@ -32,18 +32,48 @@
           <th class="py-3 px-2 text-start">Nome</th>
           <th class="text-start">Categoria</th>
           <th class="text-start">Potência</th>
+          <th class="text-start">Corrente</th>
+          <th class="text-start">Modelo</th>
+          <th class="text-start">Marca</th>
+          <th class="text-start">Tensão</th>
           <th class="text-start">Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr
           class="border-b border-zinc-300"
-          v-for="(item, index) in 5"
+          v-for="(item, index) in props.equipments"
           :key="index"
         >
-          <td class="py-4 px-2">Produto 1</td>
-          <td>Eletrônico</td>
-          <td>500W</td>
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            {{ item.name ?? "Não informado" }}
+          </td>
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            <span v-if="item.category" class="bg-green-300 px-2 rounded-full">{{
+              item.category
+            }}</span>
+            <span
+              class="bg-zinc-300 rounded-full px-3 text-white"
+              v-if="!item.category"
+              >Não informado</span
+            >
+          </td>
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            {{ item.potency ?? "Não informado" }}
+          </td>
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            {{ item.chain ?? "Não informado" }}
+          </td>
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            {{ item.model ?? "Não informado" }}
+          </td>
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            {{ item.brand ?? "Não informado" }}
+          </td>
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            {{ item.tension ?? "Não informado" }}
+          </td>
+
           <td class="">
             <button
               class="border border-zinc-300 px-3 py-2 text-red-400 rounded-lg hover:bg-red-400 hover:text-white hover:border-transparent"
@@ -63,7 +93,7 @@
 
     <div class="flex justify-between mt-8">
       <div class="flex text-zinc-600">
-        <span>Mostrando 1 de 10 items</span>
+        <span>Mostrando 1 de {{ props.equipments.length }} items</span>
       </div>
 
       <div class="flex">
@@ -95,6 +125,10 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { Equipment } from "@prisma/client";
+
+const props = defineProps<{ equipments: Equipment[] }>();
+</script>
 
 <style scoped></style>

@@ -1,13 +1,5 @@
 <template>
-  <div class="flex flex-col py-5 px-15 rounded-lg bg-zinc-50">
-    <nuxt-link to="/equipments/list">
-      <div
-        class="flex px-4 py-3 rounded-lg cursor-pointer bg-zinc-100 w-fit text-xl mb-10"
-      >
-        <font-awesome-icon :icon="['fas', 'chevron-left']" />
-      </div>
-    </nuxt-link>
-
+  <div class="flex flex-col py-5 px-15 rounded-lg bg-zinc-50 mt-5">
     <font-awesome-icon :icon="['fas', 'plug']" class="text-xl" />
     <div class="flex items-center justify-center">
       <h3 class="text-2xl mx-3"><b>Cadastro de Equipamento</b></h3>
@@ -52,8 +44,8 @@ const { data, status, error, refresh, clear, execute } = await useAsyncData(
     return $fetch("/api/equipments", {
       method: "POST",
       body: {
-        basic: store.basicInformations,
-        tecnical: store.tecnicalnformations,
+        ...store.basicInformations,
+        ...store.tecnicalnformations,
       },
     });
   }

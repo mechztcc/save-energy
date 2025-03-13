@@ -14,7 +14,7 @@
       </nuxt-link>
     </div>
 
-    <nuxt-link to="login" class="flex mb-5 w-full">
+    <nuxt-link to="/login" class="flex mb-5 w-full">
       <span class="px-8 cursor-pointer border hover:border-zinc-400 border-transparent w-full rounded-lg py-3">Sair</span>
     </nuxt-link>
   </div>
@@ -31,6 +31,12 @@ const items = reactive<
     active: () => boolean;
   }[]
 >([
+  {
+    icon: ['fas', 'house'],
+    label: "Início",
+    url: "/",
+    active: () => route.fullPath  == '/',
+  },
   {
     icon: ["fas", "lightbulb"],
     label: "Equipamentos",
