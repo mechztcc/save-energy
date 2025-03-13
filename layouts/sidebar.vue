@@ -1,5 +1,4 @@
 <template>
-
   <template v-if="store.isLoading  == 'pending'">
     <div class="absolute h-screen top-2 left-0 w-full bg-zinc-50 opacity-80 z-10 flex flex-col justify-center items-center">
       <font-awesome-icon :icon="['fas', 'lightbulb']" bounce class="text-7xl text-green-400"/>

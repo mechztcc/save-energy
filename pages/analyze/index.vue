@@ -17,7 +17,7 @@
   <div class="flex flex-col mt-10 bg-zinc-50 rounded-lg px-10 py-10 mb-20">
     <h3 class="text-2xl"><b>Consumo de Energia</b></h3>
 
-    <div class="grid grid-cols-3">
+    <div class="grid grid-cols-3 gap-10">
       <div class="col-span-1">
         <div class="flex flex-col">
           <label class="block text-gray-700 mt-5"><b>Período</b></label>
@@ -47,7 +47,12 @@
         </div>
       </div>
 
-      <div class="col-span-1 col-start-3">
+      <div class="col-span-1">
+        <label class="block text-gray-700 mt-5"><b>Tarifa</b></label>
+        <input type="text" class="w-full border p-2 rounded-lg bg-zinc-50" />
+      </div>
+
+      <div class="col-span-1">
         <div class="flex justify-end w-full mt-5">
           <button
             @click="onCalculate"
@@ -55,6 +60,27 @@
           >
             <b>CALCULAR</b>
           </button>
+        </div>
+      </div>
+
+      <div class="my-5"></div>
+
+      <div class="col-span-3" v-for="(item, index) in equipments" :key="index">
+        <div
+          class="flex justify-between items-end py-2 border-b border-zinc-400"
+        >
+          <h3 class="mb-0">{{ item.name }}</h3>
+
+          <div class="flex">
+            <div class="flex items-end">
+              <input
+                type="number"
+                class="border-b border-zinc-400 mx-3 px-2 py-2"
+                style="width: 70px"
+              />
+              <span>Hrs por dia</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

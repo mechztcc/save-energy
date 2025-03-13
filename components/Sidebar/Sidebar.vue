@@ -52,8 +52,8 @@ const items = reactive<
   {
     icon: ["fas", "gear"],
     label: "Configurações",
-    url: "/config",
-    active: () => route.fullPath === "/config",
+    url: "/",
+    active: () => route.fullPath === "/",
   },
 ]);
 </script>
