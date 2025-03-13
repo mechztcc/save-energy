@@ -1,6 +1,9 @@
 <template>
-  <div class="flex flex-col w-full bg-zinc-50 rounded-lg px-10 py-10 mt-5">
-    <div class="flex">
+  <div
+    class="flex flex-col w-full bg-zinc-50 rounded-lg"
+    :class="{ 'mt-5 px-10 py-10': props.spaced }"
+  >
+    <div class="flex" v-if="props.showTitle">
       <h3 class="text-2xl"><b>Equipamentos</b></h3>
     </div>
     <div class="flex justify-end mb-8">
@@ -11,7 +14,7 @@
       />
 
       <button
-        class="px-5 py-2 border border-zinc-300 hover:border-transparent hover:from-green-300 hover:to-green-500 bg-gradient-to-r rounded-lg hover:text-white mx-3"
+        class="px-5 py-2 border border-zinc-300 hover:border-transparent hover:from-green-300 hover:to-green-500 bg-gradient-to-r rounded-lg hover:text-white ml-3"
       >
         <font-awesome-icon :icon="['fas', 'filter']" class="" />
         Filtros
@@ -19,7 +22,8 @@
 
       <nuxt-link to="/equipments/create">
         <button
-          class="px-5 py-2 from-green-300 to-green-500 bg-gradient-to-r rounded-lg text-white"
+          v-if="showTitle"
+          class="px-5 py-2 from-green-300 to-green-500 bg-gradient-to-r rounded-lg text-white ml-3"
         >
           <font-awesome-icon :icon="['fas', 'plus']" class="" />
           Novo
@@ -29,6 +33,7 @@
     <table class="w-full" border="1">
       <thead class="border-b border-zinc-300 bg-zinc-100">
         <tr class="">
+          <th class="py-3 px-2 text-start"></th>
           <th class="py-3 px-2 text-start">Nome</th>
           <th class="text-start">Categoria</th>
           <th class="text-start">Potência</th>
@@ -42,9 +47,16 @@
       <tbody>
         <tr
           class="border-b border-zinc-300"
-          v-for="(item, index) in props.equipments"
+          v-for="(item, index) in paginatedEquipments"
           :key="index"
         >
+          <td class="py-4 px-2 text-sm text-zinc-700">
+            <input
+              type="checkbox"
+              :checked="selected.some((el) => el.id == item.id)"
+              @change="onHandleSelected(item, $event)"
+            />
+          </td>
           <td class="py-4 px-2 text-sm text-zinc-700">
             {{ item.name ?? "Não informado" }}
           </td>
@@ -98,24 +110,28 @@
 
       <div class="flex">
         <button
+          @click="changePage(pagination.actualPage - 1)"
           class="border border-zinc-300 px-3 py-2 rounded-lg text-zinc-600 mx-1"
         >
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
 
         <button
+          @click="changePage(item)"
           class="border border-zinc-300 px-3 py-2 rounded-lg mx-1 hover:bg-green-400 hover:text-white hover:border-transparent"
           :class="{
-            'bg-green-400 text-white border-transparent': item == 1,
-            ' text-zinc-600': item !== 1,
+            'bg-green-400 text-white border-transparent':
+              item == pagination.actualPage,
+            ' text-zinc-600': item !== pagination.actualPage,
           }"
-          v-for="(item, index) in 5"
+          v-for="(item, index) in pagination.totalPages"
           :key="index"
         >
           {{ item }}
         </button>
 
         <button
+          @click="changePage(pagination.actualPage + 1)"
           class="border border-zinc-300 px-3 py-2 rounded-lg text-zinc-600 mx-1"
         >
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
@@ -128,7 +144,58 @@
 <script setup lang="ts">
 import type { Equipment } from "@prisma/client";
 
-const props = defineProps<{ equipments: Equipment[] }>();
+const props = defineProps<{
+  equipments: Equipment[];
+  showTitle?: boolean;
+  spaced?: boolean;
+  selectable?: boolean;
+}>();
+const emits = defineEmits(["selected"]);
+
+const selected = ref<Equipment[]>([]);
+function onHandleSelected(eqp: Equipment, event: any) {
+  const { checked } = event.target;
+
+  if (checked) {
+    selected.value.push(eqp);
+    return;
+  } else {
+    selected.value = selected.value.filter((el) => el.id != eqp.id);
+    return;
+  }
+}
+
+let pagination = reactive<{
+  totalPages: number;
+  pages: number[];
+  actualPage: number;
+  perPage: number;
+  offset: number;
+}>({ totalPages: 0, pages: [], actualPage: 1, perPage: 5, offset: 0 });
+
+onMounted(() => {
+  pagination.totalPages = Math.ceil(
+    props.equipments.length / pagination.perPage
+  );
+  pagination.pages = Array.from(
+    { length: pagination.totalPages },
+    (_, i) => i + 1
+  );
+  pagination.offset = (pagination.actualPage - 1) * pagination.perPage;
+});
+
+const paginatedEquipments = computed(() => {
+  const start = pagination.offset;
+  const end = pagination.offset + pagination.perPage;
+  return props.equipments.slice(start, end);
+});
+
+function changePage(page: number) {
+  if (page >= 1 && page <= pagination.totalPages) {
+    pagination.actualPage = page;
+    pagination.offset = (page - 1) * pagination.perPage;
+  }
+}
 </script>
 
 <style scoped></style>

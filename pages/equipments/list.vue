@@ -1,5 +1,5 @@
 <template>
-  <EquipmentsTableList  :equipments="data?.equipments ?? []" />
+  <EquipmentsTableList  :equipments="data?.equipments ?? []" :show-title="true" :spaced="true" />
 </template>
 
 <script lang="ts" setup>

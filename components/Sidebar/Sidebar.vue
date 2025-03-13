@@ -46,8 +46,8 @@ const items = reactive<
   {
     icon: ["fas", "chart-simple"],
     label: "Consumo",
-    url: "/consumo",
-    active: () => route.fullPath === "/consumo",
+    url: "/analyze",
+    active: () => route.fullPath === "/analyze",
   },
   {
     icon: ["fas", "gear"],
