@@ -10,7 +10,7 @@
     <EquipmentsTableList
       :equipments="data?.equipments ?? []"
       :selectable="true"
-      @selected="equipments = $event"
+      @selected="onPrepareEquipments($event)"
     />
   </div>
 
@@ -63,17 +63,23 @@
         </div>
       </div>
 
-      <div class="my-5"></div>
+      <div class="my-2"></div>
+    </div>
 
-      <div class="col-span-3" v-for="(item, index) in equipments" :key="index">
+    <div class="grid grid-cols-3 gap-10">
+      <div class="col-span-1" v-for="(item, index) in equipments" :key="index">
         <div
-          class="flex justify-between items-end py-2 border-b border-zinc-400"
+          class="flex justify-between items-end py-2 px-3 border-b border-zinc-400 h-full"
         >
-          <h3 class="mb-0">{{ item.name }}</h3>
-
+          <div class="flex flex-col">
+            <h3 class="mb-0">{{ item.name }}</h3>
+            <span class="text-zinc-600 text-sm mt-2">{{ item.brand }}</span>
+            <span class="text-zinc-600 text-sm">{{ item.potency }}</span>
+          </div>
           <div class="flex">
             <div class="flex items-end">
               <input
+                v-model="item.hours"
                 type="number"
                 class="border-b border-zinc-400 mx-3 px-2 py-2"
                 style="width: 70px"
@@ -119,8 +125,7 @@ function onHandleCalendar() {
   isCalendarOpened.value = !isCalendarOpened.value;
 }
 
-const equipments = ref<Equipment[]>();
-
+const equipments = ref<any[]>([]);
 const { data, status, error } = await useFetch<{ equipments: Equipment[] }>(
   "/api/equipments"
 );
@@ -131,7 +136,19 @@ function onCalculate() {
     range: [range.value.start, range.value.end],
     equipments: equipments.value,
   };
-  console.log(payload);
+}
+
+function onPrepareEquipments(eqp: Equipment[]) {
+  const previous = equipments.value;
+  equipments.value = [];
+  eqp.map((el) => {
+    const exists = previous.filter((eqp) => eqp.id == el.id);
+    if (exists.length == 0) {
+      equipments.value.push({ ...el, hours: 0 });
+    } else {
+      equipments.value.push(exists[0])
+    }
+  });
 }
 </script>
 
