@@ -49,7 +49,7 @@
 
       <div class="col-span-1">
         <label class="block text-gray-700 mt-5"><b>Tarifa</b></label>
-        <input type="text" class="w-full border p-2 rounded-lg bg-zinc-50" />
+        <input type="number" class="w-full border p-2 rounded-lg bg-zinc-50" v-model="taxes" step="0.1"/>
       </div>
 
       <div class="col-span-1">
@@ -102,6 +102,8 @@ definePageMeta({
 
 const storeLoader = useGlobalLoaderStore();
 
+const  taxes = ref<number>(0.8)
+
 const isCalendarOpened = ref<boolean>(false);
 const range = ref({ start: new Date(2025, 2, 1), end: new Date(2025, 2, 5) });
 const dates = computed(
@@ -131,11 +133,23 @@ const { data, status, error } = await useFetch<{ equipments: Equipment[] }>(
 );
 storeLoader.isLoading = status.value;
 
+let payload = ref<any>();
+const calculateAnalyze = await useAsyncData("createEquipments", async () => {
+  if (!payload.value) return null;
+  return $fetch<any>("/api/analyze", {
+    method: "POST",
+    body: payload.value,
+  });
+}, { immediate: false });
+
 function onCalculate() {
-  const payload = {
+  payload.value = {
     range: [range.value.start, range.value.end],
     equipments: equipments.value,
+    taxes: taxes.value
   };
+
+  calculateAnalyze.execute();
 }
 
 function onPrepareEquipments(eqp: Equipment[]) {
@@ -146,7 +160,7 @@ function onPrepareEquipments(eqp: Equipment[]) {
     if (exists.length == 0) {
       equipments.value.push({ ...el, hours: 0 });
     } else {
-      equipments.value.push(exists[0])
+      equipments.value.push(exists[0]);
     }
   });
 }

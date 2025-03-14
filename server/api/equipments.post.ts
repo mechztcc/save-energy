@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const isValid = await CreateEquipmentSchema.validate(body, {
+    await CreateEquipmentSchema.validate(body, {
       abortEarly: false,
     });
 
