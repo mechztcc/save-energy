@@ -3,7 +3,7 @@ import { CreateEquipmentSchema } from "~/validators/analyze";
 export default defineEventHandler(async (event) => {
   try {
     const { range, equipments, taxes } = await readBody(event);
-    await CreateEquipmentSchema.validate(
+    const isValid = await CreateEquipmentSchema.validate(
       { range, equipments, taxes },
       {
         abortEarly: false,
@@ -17,17 +17,19 @@ export default defineEventHandler(async (event) => {
       const hours = parseFloat(eqp.hours);
 
       const totaleqp = potency * hours;
-      const totalKw = totaleqp / 1000
-      totalByEqp.push({ ...eqp, totalKw, cost: (totalKw * parseFloat(taxes)).toFixed(2) });
+      const totalKw = totaleqp / 1000;
+      totalByEqp.push({
+        ...eqp,
+        totalKw,
+        cost: (totalKw * parseFloat(taxes)).toFixed(2),
+      });
 
-      return all + totaleqp
+      return all + totaleqp;
     }, 0);
-
 
     return {
       totalByEqp,
-    }
-
+    };
   } catch (error) {
     if (error instanceof Error && error.name === "ValidationError") {
       setResponseStatus(event, 400);

@@ -49,7 +49,12 @@
 
       <div class="col-span-1">
         <label class="block text-gray-700 mt-5"><b>Tarifa</b></label>
-        <input type="number" class="w-full border p-2 rounded-lg bg-zinc-50" v-model="taxes" step="0.1"/>
+        <input
+          type="number"
+          class="w-full border p-2 rounded-lg bg-zinc-50"
+          v-model="taxes"
+          step="0.1"
+        />
       </div>
 
       <div class="col-span-1">
@@ -100,9 +105,8 @@ definePageMeta({
   layout: "sidebar",
 });
 
-const storeLoader = useGlobalLoaderStore();
-
-const  taxes = ref<number>(0.8)
+const taxes = ref<number>(0.8);
+const router = useRouter();
 
 const isCalendarOpened = ref<boolean>(false);
 const range = ref({ start: new Date(2025, 2, 1), end: new Date(2025, 2, 5) });
@@ -128,28 +132,31 @@ function onHandleCalendar() {
 }
 
 const equipments = ref<any[]>([]);
-const { data, status, error } = await useFetch<{ equipments: Equipment[] }>(
+const { data, status } = await useFetch<{ equipments: Equipment[] }>(
   "/api/equipments"
 );
-storeLoader.isLoading = status.value;
 
-let payload = ref<any>();
-const calculateAnalyze = await useAsyncData("createEquipments", async () => {
-  if (!payload.value) return null;
-  return $fetch<any>("/api/analyze", {
-    method: "POST",
-    body: payload.value,
-  });
-}, { immediate: false });
-
-function onCalculate() {
-  payload.value = {
+const body = computed(() => {
+  return {
     range: [range.value.start, range.value.end],
     equipments: equipments.value,
-    taxes: taxes.value
+    taxes: taxes.value,
   };
+});
 
-  calculateAnalyze.execute();
+const {
+  execute,
+  error,
+  data: results,
+} = await useFetch("/api/analyze", {
+  method: "post",
+  body,
+  immediate: false,
+  headers: { authorization: "token" },
+});
+
+async function onCalculate() {
+  await execute();
 }
 
 function onPrepareEquipments(eqp: Equipment[]) {

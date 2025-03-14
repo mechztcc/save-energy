@@ -6,5 +6,11 @@ export const useGlobalLoaderStore = defineStore("useGlobalLoader", {
   state: () => ({
     isLoading: 'idle' as AsyncDataRequestStatus,
   }),
-  actions: {},
+  actions: {
+    onHandle() {
+      this.isLoading == 'idle' ? this.isLoading = 'pending' : this.isLoading = 'idle'
+      console.log(this.isLoading);
+      
+    }
+  },
 });
