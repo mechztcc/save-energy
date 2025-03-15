@@ -1,7 +1,25 @@
-import * as yup from "yup";
+import Joi from "joi";
 
-export const CreateEquipmentSchema = yup.object().shape({
-  range: yup.array().required("O periodo é requerido"),
-  equipments: yup.array().required("Equipamentos  requeridos"),
-  taxes: yup.number().required("O Valor da tarifa é requerido"),
+const analyzeConsumeSchema = Joi.object({
+  range: Joi.array()
+    .required()
+    .messages({ "any.required": "O período é requerido" }),
+  equipments: Joi.array()
+    .required()
+    .messages({ "any.required": "Equipamentos requeridos" }),
+  taxes: Joi.number()
+    .required()
+    .messages({ "any.required": "O valor da tarifa é requerido" }),
 });
+
+function verify(data: any) {
+  const { error, value } = analyzeConsumeSchema.validate(data, {
+    abortEarly: false,
+  });
+  return error ? error.details.map((err) => err.message) : null;
+}
+
+export const analyzeValidator = {
+  analyzeConsumeSchema,
+  verify,
+};

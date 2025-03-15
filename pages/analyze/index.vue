@@ -133,7 +133,8 @@ function onHandleCalendar() {
 
 const equipments = ref<any[]>([]);
 const { data, status } = await useFetch<{ equipments: Equipment[] }>(
-  "/api/equipments"
+  "/api/equipments",
+  { lazy: true }
 );
 
 const body = computed(() => {
@@ -153,10 +154,12 @@ const {
   body,
   immediate: false,
   headers: { authorization: "token" },
+  watch: false,
+  lazy: true
 });
 
 async function onCalculate() {
-  await execute();
+  execute();
 }
 
 function onPrepareEquipments(eqp: Equipment[]) {

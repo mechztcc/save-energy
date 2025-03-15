@@ -39,7 +39,8 @@ import {
   faChevronLeft,
   faPlug,
   faChevronDown,
-  faCircleNotch
+  faCircleNotch,
+  fas
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGithub,
@@ -51,6 +52,7 @@ import { faSquare } from "@fortawesome/free-regular-svg-icons";
 
 export default defineNuxtPlugin((nuxtApp) => {
   library.add(
+    fas,
     faUser,
     faLock,
     faGithub,
